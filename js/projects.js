@@ -7,7 +7,7 @@ window.PortfolioData = {
     interests: ['Backend', 'AI', 'Data'],
     github: 'https://github.com/geun95',
     email: 'g95eun@gmail.com',
-    resume: null, // 예: 'assets/resume.pdf' — 실제 파일을 추가한 뒤 설정
+    resume: 'assets/resume.pdf',
   },
   projects: [{
     id: 'momentory',
