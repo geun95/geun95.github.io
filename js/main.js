@@ -70,6 +70,35 @@
       : `<div class="resource-link is-pending"><span><strong>${esc(link.label)}</strong><small>${esc(link.note)}</small></span><span class="resource-action">준비 중</span></div>`).join(''));
   }
 
+  // The home page reading line follows the document, including layout changes.
+  const readingProgress = document.querySelector('[data-reading-progress]');
+  if (readingProgress) {
+    const line = readingProgress.firstElementChild;
+    let queued = false;
+    const updateReadingProgress = () => {
+      queued = false;
+      const page = document.scrollingElement || document.documentElement;
+      const distance = page.scrollHeight - page.clientHeight;
+      const progress = distance > 0 ? Math.max(0, Math.min(1, page.scrollTop / distance)) : 0;
+      line.style.transform = `scaleX(${progress})`;
+    };
+    const scheduleReadingProgress = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(updateReadingProgress);
+    };
+    window.addEventListener('scroll', scheduleReadingProgress, { passive: true });
+    window.addEventListener('resize', scheduleReadingProgress);
+    window.addEventListener('pageshow', scheduleReadingProgress);
+    if ('ResizeObserver' in window) {
+      const resizeObserver = new ResizeObserver(scheduleReadingProgress);
+      resizeObserver.observe(document.body);
+    }
+    document.fonts?.ready.then(scheduleReadingProgress);
+    updateReadingProgress();
+    readingProgress.hidden = false;
+  }
+
   // Animate only when content enters the viewport; the default stays readable
   // without JavaScript, IntersectionObserver, or the Web Animations API.
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
