@@ -61,13 +61,148 @@
     ].map(([label, value]) => `<div><dt>${label}</dt><dd>${esc(value)}</dd></div>`).join(''));
     fill('[data-personal-role]', project.contributions?.length ? `<p class="role-intro">프로젝트에서 제가 직접 맡은 업무입니다.</p><div class="contribution-list">${project.contributions.map(item => `<div><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p></div>`).join('')}</div>` : project.role ? `<p>${esc(project.role)}</p>` : '<div class="pending-panel"><span class="small-label">개인 기여 · 확인 필요</span><h3>제가 맡은 일은 구체적인 근거와 함께 정리할 예정입니다.</h3><p>담당 기능, 직접 내린 설계 결정, 해결한 기술적 문제를 확인한 뒤 추가합니다. 아래 기능과 기술은 프로젝트 전체를 기준으로 소개합니다.</p></div>');
     fill('[data-stack]', project.stack.map(item => `<div class="stack-item"><h3>${esc(item.category)}</h3><p>${item.items.map(esc).join(' · ')}</p></div>`).join(''));
-    fill('[data-features]', project.screenshots.map((item, index) => `<article class="feature-card">
+    fill('[data-features]', project.screenshots.map((item, index) => `<article class="feature-card${index === 0 ? ' is-current' : ''}">
       <figure class="screen-figure">${item.image ? `<img src="${esc(local(item.image))}" alt="${esc(item.alt)}" width="${item.width || 390}" height="${item.height || 844}" loading="lazy">` : `<div class="screen-placeholder" role="img" aria-label="${esc(item.title)} 실제 스크린샷 준비 중"><span class="placeholder-icon" aria-hidden="true"></span><span>APP SCREENSHOT</span><strong>실제 화면 준비 중</strong><span class="placeholder-title">${esc(item.title)}</span></div>`}</figure>
       <div class="feature-copy"><p class="small-label">${esc(project.koreanName)}</p><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p></div>
     </article>`).join(''));
     fill('[data-project-links]', project.links.map(link => external(link.url)
       ? `<a class="resource-link" href="${esc(link.url)}" ${externalAttrs}><span><strong>${esc(link.label)}</strong><small>${esc(link.note)}</small></span><span class="resource-action">방문하기<span class="sr-only"> (새 탭)</span></span></a>`
       : `<div class="resource-link is-pending"><span><strong>${esc(link.label)}</strong><small>${esc(link.note)}</small></span><span class="resource-action">준비 중</span></div>`).join(''));
+  }
+
+  // Animate only when content enters the viewport; the default stays readable
+  // without JavaScript, IntersectionObserver, or the Web Animations API.
+  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const featureSection = document.querySelector('[data-horizontal-features]');
+  if (featureSection) {
+    const viewport = featureSection.querySelector('.features-viewport');
+    const track = featureSection.querySelector('[data-features]');
+    const cards = [...track.children];
+    const position = featureSection.querySelector('[data-feature-position]');
+    const progressBar = featureSection.querySelector('[data-feature-progress]');
+    const hint = featureSection.querySelector('[data-feature-hint]');
+    // One copy on either side makes 6 → 1 and 1 → 6 visually continuous.
+    const copy = card => {
+      const clone = card.cloneNode(true);
+      clone.setAttribute('data-feature-clone', '');
+      clone.setAttribute('aria-hidden', 'true');
+      clone.setAttribute('inert', '');
+      return clone;
+    };
+    track.prepend(...cards.map(copy));
+    track.append(...cards.map(copy));
+    const allCards = [...track.children];
+    let start = 0;
+    let step = 0;
+    let cycle = 0;
+    let frame = 0;
+    const modulo = (value, size) => ((value % size) + size) % size;
+    const update = () => {
+      frame = 0;
+      if (!cycle) return;
+      let left = viewport.scrollLeft;
+      if (left < start || left >= start + cycle) {
+        left = start + modulo(left - start, cycle);
+        viewport.scrollLeft = left;
+      }
+      const current = modulo(Math.round((left - start) / step), cards.length);
+      allCards.forEach((card, index) => card.classList.toggle('is-current', index % cards.length === current));
+      position.textContent = `${String(current + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+      progressBar.style.transform = `scaleX(${(current + 1) / cards.length})`;
+    };
+    const scheduleUpdate = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    const refresh = () => {
+      const progress = step ? modulo((viewport.scrollLeft - start) / step, cards.length) : 0;
+      step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : viewport.clientWidth;
+      start = cards[0].offsetLeft;
+      cycle = step * cards.length;
+      viewport.scrollLeft = start + progress * step;
+      hint.textContent = window.innerWidth >= 960 && !motionPreference.matches ? '스크롤하여 계속 넘기기' : '옆으로 계속 넘기기';
+      update();
+    };
+    viewport.addEventListener('scroll', scheduleUpdate, { passive: true });
+    // Only the feature rail consumes wheel input; the rest of the page scrolls normally.
+    viewport.addEventListener('wheel', event => {
+      if (window.innerWidth < 960 || motionPreference.matches || event.ctrlKey || event.shiftKey) return;
+      const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      if (!delta) return;
+      event.preventDefault();
+      const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? viewport.clientWidth : 1;
+      viewport.scrollLeft += delta * unit;
+      scheduleUpdate();
+    }, { passive: false });
+    viewport.addEventListener('keydown', event => {
+      if (event.target !== viewport || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      const current = modulo(Math.round((viewport.scrollLeft - start) / step), cards.length);
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? cards.length - 1 : current + (event.key === 'ArrowRight' ? 1 : -1);
+      // Keep keyboard jumps exact; wheel and touch provide continuous movement.
+      viewport.scrollLeft = start + modulo(next, cards.length) * step;
+      update();
+    });
+    window.addEventListener('resize', refresh);
+    window.addEventListener('afterprint', refresh);
+    motionPreference.addEventListener('change', refresh);
+    if ('ResizeObserver' in window) {
+      const resizeObserver = new ResizeObserver(refresh);
+      resizeObserver.observe(viewport);
+    }
+    document.fonts?.ready.then(refresh);
+    refresh();
+  }
+  if (!motionPreference.matches && 'IntersectionObserver' in window && Element.prototype.animate) {
+    const running = new Map();
+    const reveal = (element, delay = 0) => {
+      const animation = element.animate([
+        { opacity: 0, transform: 'translateY(18px)' },
+        { opacity: 1, transform: 'translateY(0)' },
+      ], {
+        id: 'portfolio-reveal',
+        duration: 600,
+        delay,
+        easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+        fill: 'backwards',
+      });
+      running.set(element, animation);
+      animation.finished.then(() => running.delete(element), () => running.delete(element));
+    };
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const element = entry.target;
+        observer.unobserve(element);
+        // Keep keyboard navigation immediately visible.
+        if (!element.contains(document.activeElement)) reveal(element, Number(element.dataset.revealDelay || 0));
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -24px 0px' });
+
+    const observe = (selector, stagger = false) => {
+      document.querySelectorAll(selector).forEach((element, index) => {
+        if (stagger) element.dataset.revealDelay = String((index % 3) * 70);
+        observer.observe(element);
+      });
+    };
+    observe('.hero-kicker, .hero h1, .hero-intro, .hero-note, .hero-foot', true);
+    observe('.project-hero > :not(.breadcrumb)', true);
+    observe('.section-heading, .project-cover, .project-info, .contact-intro, .detail-screen-board, .case-heading, .case-body, .back-projects');
+    observe('.skill-row, .contact-item', true);
+
+    const stopMotion = () => {
+      observer.disconnect();
+      running.forEach(animation => animation.cancel());
+      running.clear();
+    };
+    motionPreference.addEventListener('change', event => {
+      if (event.matches) stopMotion();
+    });
+    window.addEventListener('beforeprint', stopMotion);
+    document.addEventListener('focusin', event => {
+      running.forEach((animation, element) => {
+        if (element.contains(event.target)) animation.cancel();
+      });
+    });
   }
 
   // 스크린샷 파일 누락 시 깨진 이미지 대신 명확한 안내를 표시합니다.
