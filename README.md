@@ -8,7 +8,7 @@
 - 메인 소개와 프로젝트 상세 페이지를 분리했습니다.
 - 공통 헤더·푸터·카드·기술 목록·연락처는 같은 데이터를 사용합니다.
 
-검증 결과는 [검증 기록](docs/VERIFICATION.md), 제출용 URL 파일은 [Jung Jieun-공작과제-06.txt](submission/Jung%20Jieun-공작과제-06.txt)를 참고하세요.
+검증 결과는 [검증 기록](docs/VERIFICATION.md), 제출용 URL 파일은 [정지은-공작과제-06.txt](submission/정지은-공작과제-06.txt)를 참고하세요.
 
 ## 파일 구조
 
@@ -114,14 +114,14 @@ GitHub의 [Pages 빠른 시작](https://docs.github.com/en/pages/quickstart)과 
 실제 배포 완료 후 실행합니다.
 
 ```sh
-python3 scripts/create-submission.py --name 'Jung Jieun' --url https://geun95.github.io/
+python3 scripts/create-submission.py --name '정지은' --url https://geun95.github.io/
 ```
 
-HTTP 응답과 포트폴리오 내용이 확인된 경우에만 `submission/Jung Jieun-공작과제-06.txt`를 생성합니다. 파일 내용은 사이트 URL 한 줄입니다. 과제에서 한글 실명을 요구한다면 `--name`에 제출자 실명을 넣으세요. 배포 전에는 예시 URL을 제출 파일로 만들지 않습니다.
+HTTP 응답과 포트폴리오 내용이 확인된 경우에만 `submission/정지은-공작과제-06.txt`를 생성합니다. 파일 내용은 사이트 URL 한 줄입니다. 과제에서 한글 실명을 요구한다면 `--name`에 제출자 실명을 넣으세요. 배포 전에는 예시 URL을 제출 파일로 만들지 않습니다.
 
 ## 보완할 콘텐츠
 
-개인 기여는 사용자 확인을 거쳐 반영했습니다. 개발 기간, 팀 구성, 이메일, 이력서, 실제 앱 스크린샷, 데모 영상은 아직 제공되지 않았습니다. [확인 목록](docs/CONTENT-CHECKLIST.md)에 자세히 정리했습니다. 과제 필수 항목과 사이트 위치는 [과제 확인표](docs/ASSIGNMENT-CHECKLIST.md)에 정리했습니다.
+개인 기여는 사용자 확인을 거쳐 반영했습니다. 개발 기간, 팀 인원과 App Store 링크를 반영했습니다. 팀의 세부 역할 분담과 공개 이메일은 확인 중이며, 이력서, 실제 앱 스크린샷, 데모 영상은 아직 제공되지 않았습니다. [확인 목록](docs/CONTENT-CHECKLIST.md)에 자세히 정리했습니다. 과제 필수 항목과 사이트 위치는 [과제 확인표](docs/ASSIGNMENT-CHECKLIST.md)에 정리했습니다.
 
 접근성: 본문 건너뛰기, 의미 있는 제목·랜드마크, 키보드 포커스, 이미지 대체 텍스트, 새 탭 안내, 동작 줄이기 설정을 지원합니다. 모바일 메뉴는 별도 버튼 없이 모든 링크가 표시됩니다. 글꼴은 Pretendard Variable 1.3.9를 jsDelivr의 공식 배포 경로에서 필요한 문자 단위로 불러옵니다. 메인·상세 페이지에 동일하게 적용하며, 불러오지 못하면 시스템 글꼴로 표시합니다. 분석 추적·쿠키·서버 API를 사용하지 않습니다.
 

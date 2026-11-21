@@ -22,8 +22,8 @@ window.PortfolioData = {
     coverIsPlaceholder: true,
     coverAlt: 'Momentory 프로젝트 소개 그래픽. 실제 앱 화면은 준비 중입니다.',
     tags: ['React Native', 'Spring Boot', 'Gemini', 'PostgreSQL'],
-    period: null,
-    team: null,
+    period: '2026.06 ~ 현재',
+    team: '3인 팀',
     role: 'AI 회고·개인화 실험·앱 화면 구현',
     contributions: [
       { title: 'AI 회고 기획·개발', description: '일정과 경험을 바탕으로 하루를 돌아보는 AI 회고 기능을 기획하고 개발했습니다.' },
@@ -32,7 +32,7 @@ window.PortfolioData = {
       { title: '앱 화면 구현', description: '모바일 앱의 사용자 화면을 구현했습니다.' },
     ],
     links: [
-      { label: 'App Store', url: null, note: '공개 주소 확인 필요', candidateUrl: 'https://apps.apple.com/app/id6804971733' },
+      { label: 'App Store', url: 'https://apps.apple.com/kr/app/%EB%AA%A8%EB%A9%98%ED%86%A0%EB%A6%AC-%EA%B0%90%EC%A0%95-%EC%9D%BC%EA%B8%B0-%EB%8B%A4%EC%9D%B4%EC%96%B4%EB%A6%AC-%EB%A9%98%ED%83%88-%EA%B4%80%EB%A6%AC/id6804971733?platform=ipad', note: 'iOS 앱' },
       { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=kr.momentory.app', note: 'Android 앱' },
       { label: 'GitHub Repository', url: 'https://github.com/soma-momentory/momentory-be', note: '팀 백엔드 저장소' },
       { label: 'Demo Video', url: null, note: '영상 준비 중' },
