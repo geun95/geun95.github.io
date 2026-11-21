@@ -16,6 +16,7 @@ window.PortfolioData = {
     category: 'AI · MOBILE APPLICATION',
     tagline: '대화로 돌아보고, 기록으로 이해하는 나의 하루.',
     description: '일정과 경험을 바탕으로 AI와 대화하며 감정을 탐색하고, 일기와 주간 리포트로 일상을 돌아보는 모바일 서비스입니다.',
+    problem: '무엇부터 기록할지 막막한 순간, 경험에 담긴 감정을 구체적으로 정리하기 어렵다는 문제에서 시작합니다.',
     page: 'projects/momentory.html',
     cover: 'assets/images/momentory/cover.svg',
     coverIsPlaceholder: true,
@@ -23,7 +24,13 @@ window.PortfolioData = {
     tags: ['React Native', 'Spring Boot', 'Gemini', 'PostgreSQL'],
     period: null,
     team: null,
-    role: null,
+    role: 'AI 회고·개인화 실험·앱 화면 구현',
+    contributions: [
+      { title: 'AI 회고 기획·개발', description: '일정과 경험을 바탕으로 하루를 돌아보는 AI 회고 기능을 기획하고 개발했습니다.' },
+      { title: 'LLM 프롬프트 최적화·품질 평가', description: 'LLM 프롬프트를 최적화하고 응답의 품질을 평가했습니다.' },
+      { title: '개인화 A/B 테스트 설계·분석', description: '개인화 기능을 위한 A/B 테스트를 설계하고 결과를 분석했습니다.' },
+      { title: '앱 화면 구현', description: '모바일 앱의 사용자 화면을 구현했습니다.' },
+    ],
     links: [
       { label: 'App Store', url: null, note: '공개 주소 확인 필요', candidateUrl: 'https://apps.apple.com/app/id6804971733' },
       { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=kr.momentory.app', note: 'Android 앱' },
