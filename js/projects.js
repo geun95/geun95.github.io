@@ -4,7 +4,7 @@ window.PortfolioData = {
   profile: {
     name: 'Jung Jieun',
     major: 'Computer Engineering',
-    interests: ['Backend', 'AI'],
+    interests: ['Backend', 'AI', 'Data'],
     github: 'https://github.com/geun95',
     email: 'g95eun@gmail.com',
     resume: null, // 예: 'assets/resume.pdf' — 실제 파일을 추가한 뒤 설정
@@ -20,8 +20,7 @@ window.PortfolioData = {
     page: 'projects/momentory.html',
     cover: 'assets/images/momentory/home.webp',
     coverIsPlaceholder: false,
-    coverAlt: 'Momentory 홈 화면. 최종보고서에 수록된 시연용 데이터입니다.',
-    coverCaption: '실제 앱 화면 · 시연용 데이터',
+    coverAlt: '바바와 오늘 일정이 보이는 Momentory 홈 화면.',
     coverScreens: [
       { src: 'assets/images/momentory/home.webp', alt: '바바와 일정이 보이는 홈 화면', width: 576, height: 1206 },
       { src: 'assets/images/momentory/retrospect.webp', alt: '일정을 바탕으로 대화하는 AI 회고 화면', width: 341, height: 715 },
@@ -52,14 +51,14 @@ window.PortfolioData = {
       { category: 'Collaboration & CI', items: ['Git', 'GitHub', 'GitHub Actions'] },
       { category: 'Analytics & Monitoring', items: ['Amplitude', 'CloudWatch', 'Grafana'] },
     ],
-    // 최종보고서 31쪽은 모든 앱 화면이 시연용 데이터임을 명시합니다.
+    // 기능별 앱 화면
     screenshots: [
-      { title: '일정에서 시작하는 AI 회고', image: 'assets/images/momentory/retrospect.webp', width: 341, height: 715, sourcePage: 33, alt: '일정과 사용자 답변에서 사건을 정리하는 바바의 AI 회고', description: '바바가 일정이나 기억을 단서로 먼저 묻습니다. 사용자가 고른 사건의 감정과 바람을 자신의 말로 돌아보도록 대화를 이어 갑니다.' },
-      { title: '내 말로 남는 일기', image: 'assets/images/momentory/diary.webp', width: 576, height: 1206, sourcePage: 34, alt: '대화에서 생성한 일기와 직접 고치기 버튼', description: '대화에서 확인한 사건과 표현을 사용자 시점의 일기로 정리합니다. 저장 전후로 본문과 감정을 수정할 수 있고, 직접 쓰기도 지원합니다.' },
-      { title: '감정 맞춤 쉼터', image: 'assets/images/momentory/rest.webp', width: 576, height: 1206, sourcePage: 35, alt: '그날 감정에 맞는 감각연못 활동을 추천하는 쉼터', description: '일기의 감정에 맞춰 일곱 가지 쉼 중 하나를 추천합니다. 명상·감각연못·걱정상자 등 짧게 해 볼 수 있는 활동으로 기록 이후를 연결합니다.' },
-      { title: '다음 날 오는 바바의 편지', image: 'assets/images/momentory/letter.webp', width: 576, height: 1206, sourcePage: 36, alt: '사용자의 전날 표현과 4컷 그림을 담은 바바의 편지', description: '전날 남긴 표현을 담은 편지와 바바의 4컷 그림으로 지난 하루를 다시 만납니다. 편지를 만들기 전에는 안전 정책을 확인합니다.' },
-      { title: '한 주를 엮는 리포트', image: 'assets/images/momentory/weekly.webp', width: 341, height: 715, sourcePage: 38, alt: '한 주에 기록한 감정과 있었던 일을 정리한 주간 리포트', description: '한 주의 기록을 여섯 쪽으로 엮습니다. 남겼던 말, 감정과 사건, 괜찮았던 순간, 해낸 일을 다시 살펴봅니다.' },
-      { title: '바바와 함께 쌓는 습관', image: 'assets/images/momentory/customize.webp', width: 576, height: 1206, sourcePage: 39, alt: '모은 귤로 바바의 옷과 모자를 고르는 꾸미기 화면', description: '일기·쉼터·편지 미션과 출석으로 귤을 모아 바바를 꾸밉니다. 꾸민 바바가 홈과 회고에도 나타나 다시 찾아올 이유를 만듭니다.' },
+      { title: '일정에서 시작하는 AI 회고', image: 'assets/images/momentory/retrospect.webp', width: 341, height: 715, alt: '일정과 사용자 답변에서 사건을 정리하는 바바의 AI 회고', description: '바바가 일정이나 기억을 단서로 먼저 묻습니다. 사용자가 고른 사건의 감정과 바람을 자신의 말로 돌아보도록 대화를 이어 갑니다.' },
+      { title: '내 말로 남는 일기', image: 'assets/images/momentory/diary.webp', width: 576, height: 1206, alt: '대화에서 생성한 일기와 직접 고치기 버튼', description: '대화에서 확인한 사건과 표현을 사용자 시점의 일기로 정리합니다. 저장 전후로 본문과 감정을 수정할 수 있고, 직접 쓰기도 지원합니다.' },
+      { title: '감정 맞춤 쉼터', image: 'assets/images/momentory/rest.webp', width: 576, height: 1206, alt: '그날 감정에 맞는 감각연못 활동을 추천하는 쉼터', description: '일기의 감정에 맞춰 일곱 가지 쉼 중 하나를 추천합니다. 명상·감각연못·걱정상자 등 짧게 해 볼 수 있는 활동으로 기록 이후를 연결합니다.' },
+      { title: '다음 날 오는 바바의 편지', image: 'assets/images/momentory/letter.webp', width: 576, height: 1206, alt: '사용자의 전날 표현과 4컷 그림을 담은 바바의 편지', description: '전날 남긴 표현을 담은 편지와 바바의 4컷 그림으로 지난 하루를 다시 만납니다. 편지를 만들기 전에는 안전 정책을 확인합니다.' },
+      { title: '한 주를 엮는 리포트', image: 'assets/images/momentory/weekly.webp', width: 341, height: 715, alt: '한 주에 기록한 감정과 있었던 일을 정리한 주간 리포트', description: '한 주의 기록을 여섯 쪽으로 엮습니다. 남겼던 말, 감정과 사건, 괜찮았던 순간, 해낸 일을 다시 살펴봅니다.' },
+      { title: '바바와 함께 쌓는 습관', image: 'assets/images/momentory/customize.webp', width: 576, height: 1206, alt: '모은 귤로 바바의 옷과 모자를 고르는 꾸미기 화면', description: '일기·쉼터·편지 미션과 출석으로 귤을 모아 바바를 꾸밉니다. 꾸민 바바가 홈과 회고에도 나타나 다시 찾아올 이유를 만듭니다.' },
     ],
   }],
   // 사용자가 제공한 Skills 참고 이미지의 항목입니다. 프로젝트 전체 스택과 별도로 관리합니다.

@@ -79,7 +79,7 @@ profile: {
 4. 현재 대표 이미지는 `coverScreens`의 실제 화면 세 장으로 구성합니다. 각 `src`와 `alt`를 바꾸면 됩니다. 단일 이미지를 쓰려면 `coverScreens`를 제거하고 `cover`, `coverAlt`를 설정하며, `coverIsPlaceholder: false`로 둡니다.
 5. 상세 상단 커버는 고정 HTML이므로 `projects/momentory.html`의 `detail-screen-board` 이미지 경로·alt·캡션도 바꿉니다.
 
-현재 대표 이미지와 기능 화면은 사용자가 제공한 최종보고서의 실제 앱 화면을 사용합니다. 보고서가 시연용 데이터임을 명시한 화면만 추출했습니다. 구체적인 출처와 수치 해석은 [콘텐츠 근거](docs/MOMENTORY-SOURCES.md)를 참고하세요. 이미지가 없거나 로드되지 않으면 안내를 표시합니다. 스크린샷은 데이터 항목의 `width`·`height`에 실제 크기를 기록합니다. `sourcePage`는 기능 캡션에 보고서 출처 쪽수를 표시합니다.
+현재 대표 이미지와 기능 화면은 사용자가 제공한 최종보고서의 실제 앱 화면을 사용합니다. 보고서가 시연용 데이터임을 명시한 화면만 추출했습니다. 구체적인 출처와 수치 해석은 [콘텐츠 근거](docs/MOMENTORY-SOURCES.md)를 참고하세요. 이미지가 없거나 로드되지 않으면 안내를 표시합니다. 스크린샷은 데이터 항목의 `width`·`height`에 실제 크기를 기록합니다. 이미지 출처는 `docs/MOMENTORY-SOURCES.md`에서 관리하며 사이트에는 출처 캡션을 표시하지 않습니다.
 
 ## GitHub Pages 배포
 
