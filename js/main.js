@@ -99,7 +99,7 @@
     readingProgress.hidden = false;
   }
 
-  // Animate only when content enters the viewport; the default stays readable
+  // Reveal on each downward visit; the default stays readable
   // without JavaScript, IntersectionObserver, or the Web Animations API.
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const featureSection = document.querySelector('[data-horizontal-features]');
@@ -183,25 +183,39 @@
   }
   if (!motionPreference.matches && 'IntersectionObserver' in window && Element.prototype.animate) {
     const running = new Map();
+    const armed = new WeakSet();
     const reveal = (element, delay = 0) => {
       const animation = element.animate([
-        { opacity: 0, transform: 'translateY(18px)' },
+        { opacity: 0, transform: 'translateY(28px)' },
         { opacity: 1, transform: 'translateY(0)' },
       ], {
         id: 'portfolio-reveal',
-        duration: 600,
+        duration: 650,
         delay,
         easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
         fill: 'backwards',
       });
       running.set(element, animation);
-      animation.finished.then(() => running.delete(element), () => running.delete(element));
+      animation.finished.then(() => {
+        if (running.get(element) !== animation) return;
+        running.delete(element);
+        // A quick upward scroll during the animation can already put it below view.
+        if (element.getBoundingClientRect().top >= window.innerHeight - 24) armed.add(element);
+      }, () => {
+        if (running.get(element) === animation) running.delete(element);
+      });
     };
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
         const element = entry.target;
-        observer.unobserve(element);
+        if (!entry.isIntersecting) {
+          // Re-arm only after scrolling back above the element. Exiting at the
+          // top while reading downward must not replay it on the upward visit.
+          if (entry.boundingClientRect.top >= entry.rootBounds.bottom && !running.has(element)) armed.add(element);
+          return;
+        }
+        if (!armed.has(element) || running.has(element)) return;
+        armed.delete(element);
         // Keep keyboard navigation immediately visible.
         if (!element.contains(document.activeElement)) reveal(element, Number(element.dataset.revealDelay || 0));
       });
@@ -210,6 +224,7 @@
     const observe = (selector, stagger = false) => {
       document.querySelectorAll(selector).forEach((element, index) => {
         if (stagger) element.dataset.revealDelay = String((index % 3) * 70);
+        armed.add(element);
         observer.observe(element);
       });
     };
