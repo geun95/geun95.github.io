@@ -70,6 +70,9 @@ for project in data['projects']:
     if not project.get('coverAlt'): errors.append('missing project coverAlt')
     detail = (ROOT / project['page']).read_text(encoding='utf-8')
     if f'data-project="{project["id"]}"' not in detail: errors.append('detail project id mismatch')
+    for cover_screen in project.get('coverScreens', []):
+        check_ref(ROOT / 'index.html', cover_screen['src'])
+        if not cover_screen.get('alt'): errors.append('missing cover screen alt')
     for screen in project.get('screenshots', []):
         if screen.get('image'): check_ref(ROOT / 'index.html', screen['image'])
         if not screen.get('alt'): errors.append('missing screenshot alt')

@@ -16,6 +16,10 @@
     if (element) element.innerHTML = markup;
   };
   const home = detail ? local('index.html') : '';
+  const coverContent = project => project.coverScreens?.length
+    ? project.coverScreens.map(screen => `<img src="${esc(local(screen.src))}" alt="${esc(screen.alt)}" width="${screen.width}" height="${screen.height}" loading="lazy">`).join('')
+    : `<img src="${esc(local(project.cover))}" alt="${esc(project.coverAlt)}" width="1200" height="900" loading="lazy">`;
+
 
   fill('[data-header]', `<div class="container header-inner">
     <a class="wordmark" href="${local('index.html')}" aria-label="${esc(data.profile.name)} 홈"><span class="brand-mark" aria-hidden="true">j.</span><span>${esc(data.profile.name)}</span></a>
@@ -29,7 +33,7 @@
   }
 
   fill('[data-projects]', data.projects.map(project => `<article class="project-card">
-    <a class="project-cover" href="${esc(local(project.page))}" aria-label="${esc(project.name)} 프로젝트 상세 보기"><img src="${esc(local(project.cover))}" alt="${esc(project.coverAlt)}" width="1200" height="900" loading="lazy">${project.coverIsPlaceholder ? '<span class="cover-caption">소개 그래픽 · 실제 앱 화면 준비 중</span>' : ''}</a>
+    <a class="project-cover${project.coverScreens?.length ? ' has-screens' : ''}" href="${esc(local(project.page))}" aria-label="${esc(project.name)} 프로젝트 상세 보기">${coverContent(project)}${project.coverCaption || project.coverIsPlaceholder ? `<span class="cover-caption">${esc(project.coverCaption || '소개 그래픽 · 실제 앱 화면 준비 중')}</span>` : ''}</a>
     <div class="project-info"><p class="eyebrow">${esc(project.category)}</p><h3><a href="${esc(local(project.page))}">${esc(project.name)}</a><span>${esc(project.koreanName)}</span></h3><p class="project-tagline">${esc(project.tagline)}</p><p class="muted">${esc(project.description)}</p><dl class="project-summary"><div><dt>문제 정의</dt><dd>${esc(project.problem || "문제 정의 작성 예정")}</dd></div><div><dt>담당 역할</dt><dd>${esc(project.role || "실제 담당 업무 확인 후 추가 예정")}</dd></div><div><dt>사용 기술</dt><dd><div class="tags" aria-label="주요 기술">${tags(project.tags)}</div></dd></div></dl><a class="text-link" href="${esc(local(project.page))}">프로젝트 자세히 보기</a></div>
   </article>`).join(''));
   fill('[data-skills]', data.skills.map(skill => `<div class="skill-row"><h3>${esc(skill.category)}</h3><div class="skill-items">${skill.items.map(item => `<span>${esc(item)}</span>`).join('')}</div></div>`).join(''));
@@ -58,7 +62,7 @@
     fill('[data-personal-role]', project.contributions?.length ? `<p class="role-intro">프로젝트에서 제가 직접 맡은 업무입니다.</p><div class="contribution-list">${project.contributions.map(item => `<div><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p></div>`).join('')}</div>` : project.role ? `<p>${esc(project.role)}</p>` : '<div class="pending-panel"><span class="small-label">개인 기여 · 확인 필요</span><h3>제가 맡은 일은 구체적인 근거와 함께 정리할 예정입니다.</h3><p>담당 기능, 직접 내린 설계 결정, 해결한 기술적 문제를 확인한 뒤 추가합니다. 아래 기능과 기술은 프로젝트 전체를 기준으로 소개합니다.</p></div>');
     fill('[data-stack]', project.stack.map(item => `<div class="stack-item"><h3>${esc(item.category)}</h3><p>${item.items.map(esc).join(' · ')}</p></div>`).join(''));
     fill('[data-features]', project.screenshots.map((item, index) => `<article class="feature-card">
-      <figure class="screen-figure">${item.image ? `<img src="${esc(local(item.image))}" alt="${esc(item.alt)}" width="390" height="844" loading="lazy">` : `<div class="screen-placeholder" role="img" aria-label="${esc(item.title)} 실제 스크린샷 준비 중"><span class="placeholder-icon" aria-hidden="true"></span><span>APP SCREENSHOT</span><strong>실제 화면 준비 중</strong><span class="placeholder-title">${esc(item.title)}</span></div>`}<figcaption>${item.image ? esc(item.title) + ' · 실제 앱 화면' : '이미지 미제공 · 실제 앱 화면을 추가할 영역입니다.'}</figcaption></figure>
+      <figure class="screen-figure">${item.image ? `<img src="${esc(local(item.image))}" alt="${esc(item.alt)}" width="${item.width || 390}" height="${item.height || 844}" loading="lazy">` : `<div class="screen-placeholder" role="img" aria-label="${esc(item.title)} 실제 스크린샷 준비 중"><span class="placeholder-icon" aria-hidden="true"></span><span>APP SCREENSHOT</span><strong>실제 화면 준비 중</strong><span class="placeholder-title">${esc(item.title)}</span></div>`}<figcaption>${item.image ? '실제 앱 화면 · 시연용 데이터' + (item.sourcePage ? ' · 보고서 ' + esc(item.sourcePage) + '쪽' : '') : '이미지 미제공 · 실제 앱 화면을 추가할 영역입니다.'}</figcaption></figure>
       <div class="feature-copy"><p class="small-label">${esc(project.koreanName)}</p><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p></div>
     </article>`).join(''));
     fill('[data-project-links]', project.links.map(link => external(link.url)
