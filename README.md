@@ -3,10 +3,12 @@
 미니멀 화이트 디자인의 정적 개발자 포트폴리오입니다. 현재 프로젝트는 **Momentory 한 개**이며, 개인 프로필 README와 별도로 운영합니다.
 
 - 배포 대상 저장소: <https://github.com/geun95/geun95.github.io>
-- 사이트 주소: <https://geun95.github.io/> (배포 후 접속 확인)
+- 사이트 주소: <https://geun95.github.io/> (2026-11-22 배포 및 접속 확인 완료)
 - HTML / CSS / JavaScript만 사용합니다. 패키지 설치나 빌드가 필요 없습니다.
 - 메인 소개와 프로젝트 상세 페이지를 분리했습니다.
 - 공통 헤더·푸터·카드·기술 목록·연락처는 같은 데이터를 사용합니다.
+
+검증 결과는 [검증 기록](docs/VERIFICATION.md), 제출용 URL 파일은 [Jung Jieun-공작과제-06.txt](submission/Jung%20Jieun-공작과제-06.txt)를 참고하세요.
 
 ## 파일 구조
 

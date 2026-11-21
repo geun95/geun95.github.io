@@ -1,0 +1,31 @@
+# 구현·배포 검증
+
+검증일: 2026-11-22 (Asia/Seoul)
+
+- 사이트: https://geun95.github.io/
+- 상세 페이지: https://geun95.github.io/projects/momentory.html
+- 저장소: https://github.com/geun95/geun95.github.io
+- 배포 브랜치: main
+
+## 실행한 검사
+
+- `node --check js/main.js` 및 `node --check js/projects.js`: 통과.
+- `python3 scripts/check-site.py`: HTML 2개, 프로젝트 1개, 내부 링크·앵커·이미지·메타데이터 검사 통과.
+- 로컬 메인: 1440px / 768px / 390px / 320px에서 가로 넘침 없음.
+- 로컬 상세: 1440px / 768px / 390px에서 가로 넘침 없음.
+- 실제 배포 메인: 1440px에서 화면·카드 1개·이미지 로드 확인. 빈 href 링크 없음.
+- 실제 배포 상세: 390px에서 기능 6개, 실제 화면 준비 중 영역 6개, 가로 넘침 없음.
+- 메인 프로젝트 보기 → 상세 페이지, 상세에서 메인으로 이동, Features 목차 이동 동작 확인.
+- 배포 페이지의 브라우저 오류·경고 로그 없음.
+- 배포된 HTML 2개, CSS, JS 2개, 아이콘·커버가 로컬 소스와 SHA-256 기준 일치.
+- 활성 외부 링크 3개(GitHub 프로필, 팀 백엔드 GitHub, Google Play): HTTP 200 확인.
+- App Store 후보 URL: HTTP 404. 클릭 링크를 준비 중 표시로 교체.
+- 제출 TXT: HTTP 200 및 포트폴리오 식별 후 생성. URL 한 줄만 포함하는지 확인.
+
+GitHub Pages용 저장소에 소스를 업로드한 후 별도 게시 설정 변경 없이 사이트가 제공되었습니다. 실제 주소의 HTTP 응답·파일 내용·브라우저 화면을 기준으로 배포를 검증했습니다.
+
+## 남은 콘텐츠
+
+개인 역할, 개발 기간·팀 구성, 실제 앱 이미지, 이메일·이력서, 데모 영상과 올바른 App Store 주소는 추가 확인이 필요합니다. 상세 항목은 [콘텐츠 확인 목록](CONTENT-CHECKLIST.md)을 참고하세요. 특히 개인 담당 업무는 확인 전이므로 대학 과제의 My Role 항목은 추가 작성이 필요합니다.
+
+현재 구현은 이 항목들을 준비 중으로 구분하며, 미확인된 개인 성과·숙련도·정량 수치를 공개하지 않습니다. 기존 Momentory 앱 코드와 GitHub 프로필 README는 변경하지 않았습니다.
