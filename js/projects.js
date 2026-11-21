@@ -40,7 +40,6 @@ window.PortfolioData = {
       { label: 'App Store', url: 'https://apps.apple.com/kr/app/%EB%AA%A8%EB%A9%98%ED%86%A0%EB%A6%AC-%EA%B0%90%EC%A0%95-%EC%9D%BC%EA%B8%B0-%EB%8B%A4%EC%9D%B4%EC%96%B4%EB%A6%AC-%EB%A9%98%ED%83%88-%EA%B4%80%EB%A6%AC/id6804971733?platform=ipad', note: 'iOS 앱' },
       { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=kr.momentory.app', note: 'Android 앱' },
       { label: 'GitHub Repository', url: 'https://github.com/soma-momentory/momentory-be', note: '팀 백엔드 저장소' },
-      { label: 'Demo Video', url: null, note: '영상 준비 중' },
     ],
     stack: [
       { category: 'Frontend', items: ['TypeScript', 'React Native', 'Expo'] },
