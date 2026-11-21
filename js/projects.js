@@ -62,12 +62,12 @@ window.PortfolioData = {
       { title: '바바와 함께 쌓는 습관', image: 'assets/images/momentory/customize.webp', width: 576, height: 1206, sourcePage: 39, alt: '모은 귤로 바바의 옷과 모자를 고르는 꾸미기 화면', description: '일기·쉼터·편지 미션과 출석으로 귤을 모아 바바를 꾸밉니다. 꾸민 바바가 홈과 회고에도 나타나 다시 찾아올 이유를 만듭니다.' },
     ],
   }],
-  // 사용자가 직접 사용했다고 확인한 기술만 표시합니다. 숙련도 수치는 부여하지 않습니다.
+  // 사용자가 제공한 Skills 참고 이미지의 항목입니다. 프로젝트 전체 스택과 별도로 관리합니다.
   skills: [
-    { category: 'Languages', items: ['Java'] },
-    { category: 'Backend', items: ['Spring Boot'] },
-    { category: 'AI / ML', items: ['Gemini API', 'Jev'] },
-    { category: 'Database', items: ['PostgreSQL'] },
-    { category: 'DevOps & Tools', items: ['Docker', 'Git', 'GitHub'] },
+    { category: 'Languages', items: ['Java', 'Python', 'C++'] },
+    { category: 'Backend', items: ['Spring Boot', 'Node.js', 'Express'] },
+    { category: 'Database', items: ['MySQL', 'PostgreSQL'] },
+    { category: 'AI / ML', items: ['PyTorch', 'scikit-learn', 'OpenAI API'] },
+    { category: 'DevOps & Tools', items: ['Git', 'GitHub', 'Docker', 'Swagger'] },
   ],
 };

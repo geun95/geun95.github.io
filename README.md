@@ -127,4 +127,4 @@ HTTP 응답과 포트폴리오 내용이 확인된 경우에만 `submission/정�
 
 글꼴 설정: `css/style.css`의 `--font` 및 두 HTML의 글꼴 스타일시트 링크. [Pretendard 공식 안내](https://github.com/orioncactus/pretendard)를 참고하세요.
 
-개인 Skills와 프로젝트 전체 Tech Stack은 별도로 관리합니다. 현재 Skills는 사용자가 직접 사용했다고 확인한 기술만 담습니다. CSS·JavaScript를 변경할 때는 두 HTML의 `?v=` 값을 함께 갱신하면 이전 방문자의 캐시를 갱신할 수 있습니다.
+개인 Skills와 프로젝트 전체 Tech Stack은 별도로 관리합니다. 현재 Skills는 사용자가 제공한 참고 이미지의 15개 기술을 담습니다. Momentory의 실제 기술 구성은 상세 페이지에서 별도로 관리합니다. CSS·JavaScript를 변경할 때는 두 HTML의 `?v=` 값을 함께 갱신하면 이전 방문자의 캐시를 갱신할 수 있습니다.
